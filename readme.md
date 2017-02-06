@@ -14,6 +14,14 @@ d.search('duckduckgo')
 .then(console.log)  // logs results from first 5 pages
 ```
 
+```javascript
+const Duck = require('goduckduckgo');
+const d = new Duck();
+
+d.search('duckduckgo', {maxPage: 3})
+.then(console.log)  // logs results from first 3 pages
+```
+
 ## Options
 ```javascript
 const config = {

@@ -22,9 +22,14 @@ class Duck {
     this.searchAPI = '/html';
     this.cheerio = cheerio;
     this.maxPage = config.maxPage || 5;
+    this.maxResults = 30 + (this.maxPage - 1) * 50;
   }
 
   search(query, config) {
+    config = config || {};
+    let maxPage = config.maxPage || this.maxPage;
+    let maxResults = 30 + (maxPage - 1) * 50;
+
     return new Promise((resolve, reject)=>{
       const q = {
         q: query,
@@ -35,31 +40,26 @@ class Duck {
       let results = [];
       let r = this.r.get(this.searchAPI, {params: q});
 
-      const getResults = (res) => {
-        const $ = this.cheerio.load(res.data);
-        let result = $('a.result__url').map((i, el) => $(el).attr('href')).get();
-        results = results.concat(result);
-        let pq = _.chain($('form').serializeArray().slice(1))
-        .keyBy('name')
-        .mapValues('value')
-        .value();
-        page++;
-        return this.r.post(this.searchAPI, qs.stringify(pq));
-      };
-      r
-      .then(getResults)
-      .then(getResults)
-      .then(getResults)
-      .then(getResults)
-      .then(res => {
-        const $ = this.cheerio.load(res.data);
-        let result = $('a.result__url').map((i, el) => $(el).attr('href')).get();
-        results = results.concat(result);
-        page++;
-        resolve(results);
-      })
-      .catch(reject);
+      const loop = (p) => {
+        p.then(res => {
+          const $ = this.cheerio.load(res.data);
+          let result = $('a.result__url').map((i, el) => $(el).attr('href')).get();
+          results = results.concat(result);
+          let pq = _.chain($('form').serializeArray().slice(1))
+          .keyBy('name')
+          .mapValues('value')
+          .value();
+          if(typeof pq.s === 'undefined' || pq.s >= maxResults){
+            resolve(results);
+            return
+          }else{
+            loop(this.r.post(this.searchAPI, qs.stringify(pq)));
+          }
+        })
+      }
 
+      loop(r);
+      
     });
   }
 }
