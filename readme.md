@@ -1,4 +1,9 @@
 # GoDuckDuckGo
+## Install
+```
+npm install goduckduckgo --save
+```
+
 ## Usage
 
 ```javascript
