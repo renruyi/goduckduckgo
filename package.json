@@ -1,0 +1,16 @@
+{
+  "name": "goduckduckgo",
+  "version": "1.0.0",
+  "description": "a duckduckgo web search scraper",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ruyi",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "axios": "^0.15.3",
+    "cheerio": "^0.22.0",
+    "lodash": "^4.17.4"
+  }
+}
