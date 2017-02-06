@@ -6,7 +6,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Ruyi",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/renruyi/goduckduckgo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/renruyi/goduckduckgo/issues",
+    "email": "ruyi.ren@gmail.com"
+  },
+  "homepage": "https://github.com/renruyi/goduckduckgo",
+  "author": "Ruyi Ren <ruyi.ren@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.15.3",
