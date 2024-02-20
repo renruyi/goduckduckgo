@@ -1,43 +1,30 @@
 # GoDuckDuckGo
+
 ## Install
+
 ```
 npm install goduckduckgo --save
 ```
 
 ## Usage
 
-```javascript
-const Duck = require('goduckduckgo');
+```typescript
+import { Duck } from "goduckduckgo";
 const d = new Duck();
 
-d.search('duckduckgo')
-.then(console.log)  // logs results from first 5 pages
-```
-
-```javascript
-const Duck = require('goduckduckgo');
-const d = new Duck();
-
-d.search('duckduckgo', {maxPage: 3})
-.then(console.log)  // logs results from first 3 pages
+const results = await d.search("duckduckgo");
 ```
 
 ## Options
-```javascript
+
+```typescript
+import { ProxyConfiguration } from 'crawlee'
 const config = {
-  proxy: {
-    host: '127.0.0.1',
-    port: 9000,
-    auth: : {
-      username: 'mikeymike',
-      password: 'rapunz3l'
-    }
-  },
-  headers: {
-    'User-Agent': 'scraper'
-  },
-  timeout: 1000
-}
+  proxyConfiguration: new ProxyConfiguration({
+    proxyUrls: ["http://user:pass@proxy-1.com", "http://user:pass@proxy-2.com"],
+  }),
+  maxPage: 3,
+};
 
 const d = new Duck(config);
 ```

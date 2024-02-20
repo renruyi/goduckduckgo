@@ -1,8 +1,9 @@
 {
   "name": "goduckduckgo",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "a duckduckgo web search scraper",
-  "main": "index.js",
+  "main": "index.ts",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,8 +19,10 @@
   "author": "Ruyi Ren <ruyi.ren@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.15.3",
-    "cheerio": "^0.22.0",
-    "lodash": "^4.17.4"
+    "crawlee": "^3.7.3"
+  },
+  "devDependencies": {
+    "tsx": "^4.7.1",
+    "typescript": "^5.3.3"
   }
 }
