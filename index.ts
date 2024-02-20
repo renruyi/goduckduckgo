@@ -23,7 +23,15 @@ export class Duck {
         $(".results > .result > div").each((index, el) => {
           const title = $(el).find("h2 > a").text();
           const snippet = $(el).find(".result__snippet").text();
-          const url = $(el).find("h2 > a").attr("href") as string;
+          const redirectUrl = $(el).find("h2 > a").attr("href") as string;
+          let url
+          try {
+            const u = new URL('https:' + redirectUrl);
+            url = u.searchParams.get("uddg") || redirectUrl;
+          }catch(e){
+            url = redirectUrl;
+          }
+          
           data.push({ title, snippet, url });
         });
         if (page < maxPage) {
