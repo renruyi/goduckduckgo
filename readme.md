@@ -18,7 +18,7 @@ const results = await d.search("duckduckgo");
 ## Options
 
 ```typescript
-import { ProxyConfiguration } from 'crawlee'
+import { ProxyConfiguration } from '@crawlee/core'
 const config = {
   proxyConfiguration: new ProxyConfiguration({
     proxyUrls: ["http://user:pass@proxy-1.com", "http://user:pass@proxy-2.com"],
@@ -28,3 +28,4 @@ const config = {
 
 const d = new Duck(config);
 ```
+
