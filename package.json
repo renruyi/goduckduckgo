@@ -19,7 +19,8 @@
   "author": "Ruyi Ren <ruyi.ren@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "crawlee": "^3.7.3"
+    "@crawlee/cheerio": "^3.7.3",
+    "@crawlee/core": "^3.7.3"
   },
   "devDependencies": {
     "tsx": "^4.7.1",

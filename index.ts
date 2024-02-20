@@ -1,4 +1,5 @@
-import { CheerioCrawler, Dataset, RequestQueue } from "crawlee";
+import { RequestQueue } from "@crawlee/core";
+import { CheerioCrawler} from "@crawlee/cheerio";
 
 interface SearchResult {
   title: string;
@@ -40,7 +41,7 @@ export class Duck {
           url.searchParams.set("s", length.toString());
 
           const queue = await RequestQueue.open();
-          console.log('adding request', url.toString())
+          // console.log('adding request', url.toString())
           queue.addRequest({ url: url.toString() });
         }
       },
