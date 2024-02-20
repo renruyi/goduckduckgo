@@ -8,8 +8,12 @@ interface SearchResult {
 }
 
 export class Duck {
-  private crawler: CheerioCrawler;
   private data: SearchResult[] = [];
+  private options: {
+    maxPage?: number;
+    proxyConfiguration?: any;
+    crawleeOptions?: any;
+  };
 
   constructor(
     options: {
@@ -18,15 +22,19 @@ export class Duck {
       crawleeOptions?: any;
     } = {}
   ) {
-    const { crawleeOptions, proxyConfiguration } = options;
+    this.options = options;    
+  }
+
+  crawlerFactory() {
+    const { crawleeOptions, proxyConfiguration } = this.options;
     const config = new Configuration({
       persistStorage: false,
       ...crawleeOptions,
     });
     const data = this.data;
-    const maxPage = options.maxPage || 1;
+    const maxPage = this.options.maxPage || 1;
     let page = 0;
-    this.crawler = new CheerioCrawler(
+    return new CheerioCrawler(
       {
         proxyConfiguration,
         async requestHandler({ request, response, body, contentType, $ }) {
@@ -62,8 +70,9 @@ export class Duck {
   }
 
   async search(q: string) {
+    const crawler = this.crawlerFactory();
     const url = `https://duckduckgo.com/html/?q=${encodeURIComponent(q)}`;
-    await this.crawler.run([url]);
+    await crawler.run([url]);
     const res = [...this.data];
     this.data = [];
     return res;
