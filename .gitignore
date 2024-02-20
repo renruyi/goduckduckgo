@@ -1,6 +1,9 @@
 # local tests
 test.*
 
+# local files
+storage
+
 # Logs
 logs
 *.log
